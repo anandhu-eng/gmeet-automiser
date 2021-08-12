@@ -90,9 +90,9 @@ print("##### WELCOME TO MEET AUTOMISER #####")
 
 #browser_name=input("Enter the name of the browser in which you want to open Gmeet:").lower()
 browser_name="firefox"
-usersname="20cso11@sctce.ac.in"
-passwrd="anandhusct@1062"
-meetcode="ajefnxngav"
+usersname=""
+passwrd=""
+meetcode=""
 #usersname=input("Enter the username of your Gmail:")
 #passwrd=getpass.getpass(prompt="Enter the password of your Gmail:")
 #meetcode=input("Enter the meet code:")
