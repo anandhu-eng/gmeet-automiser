@@ -5,7 +5,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import time
 import getpass
-
+from plyer import notification
+#the class of number of participants:uGOf1d
 
 def gotomeet(usersname, passwrd, meetcode, browser_name):
     ####        BROWSER DRIVER SELECTION        ####
@@ -60,16 +61,39 @@ def gotomeet(usersname, passwrd, meetcode, browser_name):
     driver.find_element_by_xpath("//div[@class='IYwVEf HotEze nAZzG']//div[@class='oTVIqe BcUQQ']//*[local-name()='svg']").click()
     time.sleep(2)
     driver.find_element_by_css_selector('div.uArJ5e.UQuaGc.Y5sE8d.uyXBBb.xKiqt').click()
+    time.sleep(5)
+    #participants_beg=driver.find_element_by_class_name("uGOf1d").get_attribute("textContent")
+
+    participants_beg=int(driver.find_element_by_class_name("uGOf1d").get_attribute("textContent"))
+    participants_end=0
+    while(True):
+        time.sleep(10)
+        participants_end=int(driver.find_element_by_class_name("uGOf1d").get_attribute("textContent"))
+        print(participants_end)
+        if(participants_beg-participants_end>7):
+            driver.find_element_by_xpath("//button[@aria-label='Leave call']").click()
+            title="GMeet Automiser"
+            message="Meet ended!! closing the window in 10 seconds"
+            notification.notify(title=title, message=message, timeout=10)
+            time.sleep(10)
+            driver.close()
+            return
+            
+        else:
+            participants_beg=participants_end
+    #print(participants)
     if(browser_name=="chrome"):
         while(True):
             pass
 
 print("##### WELCOME TO MEET AUTOMISER #####")
 
-browser_name=input("Enter the name of the browser in which you want to open Gmeet:").lower()
-
-
-usersname=input("Enter the username of your Gmail:")
-passwrd=getpass.getpass(prompt="Enter the password of your Gmail:")
-meetcode=input("Enter the meet code:")
+#browser_name=input("Enter the name of the browser in which you want to open Gmeet:").lower()
+browser_name="firefox"
+usersname="20cso11@sctce.ac.in"
+passwrd="anandhusct@1062"
+meetcode="ajefnxngav"
+#usersname=input("Enter the username of your Gmail:")
+#passwrd=getpass.getpass(prompt="Enter the password of your Gmail:")
+#meetcode=input("Enter the meet code:")
 gotomeet(usersname, passwrd, meetcode,browser_name)
