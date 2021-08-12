@@ -63,6 +63,12 @@ def gotomeet(usersname, passwrd, meetcode, browser_name):
     driver.find_element_by_css_selector('div.uArJ5e.UQuaGc.Y5sE8d.uyXBBb.xKiqt').click()
     time.sleep(5)
     #participants_beg=driver.find_element_by_class_name("uGOf1d").get_attribute("textContent")
+    while(True):
+        try:
+            driver.find_element_by_class_name("uGOf1d")
+            break
+        except:
+            pass
 
     participants_beg=int(driver.find_element_by_class_name("uGOf1d").get_attribute("textContent"))
     participants_end=0
@@ -88,12 +94,9 @@ def gotomeet(usersname, passwrd, meetcode, browser_name):
 
 print("##### WELCOME TO MEET AUTOMISER #####")
 
-#browser_name=input("Enter the name of the browser in which you want to open Gmeet:").lower()
-browser_name="firefox"
-usersname=""
-passwrd=""
-meetcode=""
-#usersname=input("Enter the username of your Gmail:")
-#passwrd=getpass.getpass(prompt="Enter the password of your Gmail:")
-#meetcode=input("Enter the meet code:")
+browser_name=input("Enter the name of the browser in which you want to open Gmeet:").lower()
+
+usersname=input("Enter the username of your Gmail:")
+passwrd=getpass.getpass(prompt="Enter the password of your Gmail:")
+meetcode=input("Enter the meet code:")
 gotomeet(usersname, passwrd, meetcode,browser_name)
