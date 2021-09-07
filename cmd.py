@@ -1,56 +1,30 @@
-# importing libraries
-import subprocess
-import os
+import datetime
 
-# installing a python package
-def install(package):
-    temp = subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-    # get the output of ping
-    output = str(temp.communicate())
+import pyscreenshot as ImageGrab
+import numpy as np
+import cv2
+#from win32api import GetSystemMetrics
 
-    output = output.split("\n")
+#width = GetSystemMetrics(0)
+#height = GetSystemMetrics(1)
+time_stamp = datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')
+file_name = f'{time_stamp}.mp4'
+fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
+captured_video = cv2.VideoWriter(file_name, fourcc, 3.0, (1920, 1080))
 
-    output = output[0].split("\\")
+#webcam = cv2.VideoCapture(1)
 
-    # variable to store the result
-    res = []
+while True:
+    img = ImageGrab.grab(bbox=(0, 0, 1920, 1080))
+    img_np = np.array(img)
+    img_final = cv2.cvtColor(img_np, cv2.COLOR_BGR2RGB)
+    #_, frame = webcam.read()
+    #fr_height, fr_width, _ = frame.shape
+    #img_final[0:fr_height, 0: fr_width, :] = frame[0: fr_height, 0: fr_width, :]
+    cv2.imshow('Secret Capture', img_final)
 
-    for line in output:
-        res.append(line)
+    # cv2.imshow('webcam', frame)
 
-    # print the results
-    print("ping results: ")
-    print("\n".join(res[len(res) - 3 : len(res) - 1]))
-    return res
-
-
-def apt_install(module_name):
-    try:
-        temp = subprocess.check_call(
-            ["sudo apt install {}".format(module_name)],
-            shell=True,
-            stdin=None,
-            stdout=open(os.devnull, "wb"),
-            executable="/bin/bash",
-        )
-    #    output = str(temp.communicate())
-    #
-    #        output = output.split("\n")
-    #
-    #       output = output[0].split('\\')
-    #
-    # 	    # variable to store the result
-    #       res = []
-    #
-    #       for line in output:
-    #  	    res.append(line)
-    #
-    # 	    # print the results
-    #       print('ping results: ')
-    #      print('\n'.join(res[len(res) - 3:len(res) - 1]))
-    except subprocess.CalledProcessError as e:
-        print(e.output)
-
-
-# install('selenium')
-apt_install("ffmpeg")
+    captured_video.write(img_final)
+    if cv2.waitKey(10) == ord('q'):
+        break
