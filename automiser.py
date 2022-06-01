@@ -59,20 +59,25 @@ def gotomeet(usersname, passwrd, meetcode, browser_name):
     password.send_keys(passwrd)
     password.send_keys(Keys.ENTER)
     time.sleep(7)
-    elem = driver.find_element_by_xpath("//input[@id='i3'] ")
+    elem = driver.find_element_by_xpath("//input[@id='i4'] ")
     elem.send_keys(meetcode)
     elem.send_keys(Keys.RETURN)
-    time.sleep(5)
+    #time.sleep(5)
     mute = WebDriverWait(driver, 20).until(
         EC.element_to_be_clickable((By.CLASS_NAME, "ZB88ed"))
     )
-    mute.click()
+    #mute.click()#amuhobudph
+    #driver.find_element_by_xpath(
+     #   "//div[@class='VTBa7b MbhUzd']//div[@class='I5fjHe wb61gb']//*[local-name()='svg']"
+    #).click()
+    butns = driver.find_elements_by_class_name("GKGgdd")
+    for butn in butns:
+        butn.click()
     time.sleep(2)
-    driver.find_element_by_xpath(
-        "//div[@class='IYwVEf HotEze nAZzG']//div[@class='oTVIqe BcUQQ']//*[local-name()='svg']"
-    ).click()
-    time.sleep(2)
-    driver.find_element_by_css_selector("div.uArJ5e.UQuaGc.Y5sE8d.uyXBBb.xKiqt").click()
+    #driver.find_element_by_class_name("VfPpkd-vQzf8d").click()
+    join=driver.find_element_by_xpath('//*[@id="yDmH0d"]/c-wiz/div/div/div[10]/div[3]/div/div[1]/div[3]/div/div/div[2]/div/div[2]/div/div[1]/div[1]/button/span')
+    join.click()
+    #driver.find_element_by_css_selector("div.uArJ5e.UQuaGc.Y5sE8d.uyXBBb.xKiqt").click()
     time.sleep(5)
     while True:
         try:
@@ -123,14 +128,15 @@ start_time = []
 browser_name = input(
     "Enter the name of the browser in which you want to open Gmeet:"
 ).lower()
-usersname = input("Enter the username of your Gmail:")
-passwrd = getpass.getpass(prompt="Enter the password of your Gmail:")
+usersname = "20cso11@sctce.ac.in"
+#passwrd = getpass.getpass(prompt="Enter the password of your Gmail:")
+passwrd = "anandhusct@1062"
 
 ####        SECTION FOR ENTERING THE PERIOD DETAILS         ####
 number_of_periods = int(input("Enter the number of period you have today:"))
 for i in range(number_of_periods):
     period = input(
-        ("Enter the meetcode for {period_number} period:").format(period_number=i + 1)
+        ("Enter the meetcode for period {period_number} :").format(period_number=i + 1)
     )
     inp_time = input("Enter the time of the meet in hour:")
     inp_time_min = input("Enter the time of meet in minutes:")
