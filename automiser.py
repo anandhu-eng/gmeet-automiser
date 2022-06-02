@@ -128,9 +128,9 @@ start_time = []
 browser_name = input(
     "Enter the name of the browser in which you want to open Gmeet:"
 ).lower()
-usersname = "20cso11@sctce.ac.in"
+usersname = "username of your gmail"
 #passwrd = getpass.getpass(prompt="Enter the password of your Gmail:")
-passwrd = "anandhusct@1062"
+passwrd = "password of your gmail"
 
 ####        SECTION FOR ENTERING THE PERIOD DETAILS         ####
 number_of_periods = int(input("Enter the number of period you have today:"))
